@@ -1,114 +1,129 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 export default function Home() {
+  // Typing Animation
+  const roles = [
+    "AI Student",
+    "DSA Learner",
+    "Web Developer",
+    "Python Enthusiast",
+  ];
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+
+  useEffect(() => {
+    let i = 0;
+    const current = roles[roleIndex];
+
+    const typing = setInterval(() => {
+      setDisplayText(current.substring(0, i + 1));
+      i++;
+
+      if (i === current.length) {
+        clearInterval(typing);
+        setTimeout(() => {
+          setRoleIndex((prev) => (prev + 1) % roles.length);
+          setDisplayText("");
+        }, 1500);
+      }
+    }, 120);
+
+    return () => clearInterval(typing);
+  }, [roleIndex]);
+
   return (
-    <main className="bg-gray-50 p-8 space-y-16">
-
-      {/* ================= Hero Section ================= */}
-      <section className="text-center py-20">
-        <h1 className="text-5xl font-bold mb-4 text-gray-900">
-          Hi, I’m Awais 👋
+    <main className="bg-gradient-to-b from-gray-50 to-gray-200 p-8 space-y-20">
+      {/* ================= Premium Hero Section ================= */}
+      <section className="text-center py-24 animate-fadeIn">
+        <h1 className="text-6xl font-extrabold mb-4 text-gray-900 drop-shadow">
+          Hi, I’m <span className="text-blue-600">Awais</span> 👋
         </h1>
-        <p className="text-xl text-gray-600">
-          A passionate learner exploring Web Development, React, and Next.js 🚀
+
+        <p className="text-2xl text-gray-700 mt-4 font-medium h-10">
+          {displayText} <span className="text-blue-600">|</span>
         </p>
-      </section>
 
-      {/* ================= About Me Section ================= */}
-      <section className="bg-white py-16 px-6 rounded-xl shadow-lg border">
-        <h2 className="text-3xl font-bold text-blue-600 mb-4 text-center">
-          About Me
-        </h2>
-
-        <p className="text-gray-700 text-lg leading-relaxed max-w-3xl mx-auto text-center">
-          I am Awais, an enthusiastic learner who is exploring web development.
-          I love working with Next.js, React, TailwindCSS, and modern UI designs.
-          My main goal is to build beautiful and efficient web applications while 
-          improving my skills every day.
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-6">
+          BS Artificial Intelligence student at <strong>GIK Institute</strong>,
+          building skills in AI, DSA, Python, and Full-Stack Web Development.
         </p>
-      </section>
 
-      {/* ================= Skills Section ================= */}
-      <section className="py-16 px-6">
-        <h2 className="text-3xl font-bold text-blue-600 mb-8 text-center">
-          Skills
-        </h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <div className="bg-white text-gray-800 p-6 rounded shadow-lg border text-center">
-            <h3 className="font-bold mb-2 text-gray-900">HTML</h3>
-            <p className="text-gray-600">Markup language for building web pages</p>
-          </div>
-          <div className="bg-white text-gray-800 p-6 rounded shadow-lg border text-center">
-            <h3 className="font-bold mb-2 text-gray-900">CSS / Tailwind</h3>
-            <p className="text-gray-600">Design beautiful layouts with TailwindCSS</p>
-          </div>
-          <div className="bg-white text-gray-800 p-6 rounded shadow-lg border text-center">
-            <h3 className="font-bold mb-2 text-gray-900">JavaScript / React</h3>
-            <p className="text-gray-600">Dynamic web apps with React & Next.js</p>
-          </div>
-          <div className="bg-white text-gray-800 p-6 rounded shadow-lg border text-center">
-            <h3 className="font-bold mb-2 text-gray-900">Git & GitHub</h3>
-            <p className="text-gray-600">Version control and collaboration</p>
-          </div>
-          <div className="bg-white text-gray-800 p-6 rounded shadow-lg border text-center">
-            <h3 className="font-bold mb-2 text-gray-900">Node.js</h3>
-            <p className="text-gray-600">Backend basics & server-side logic</p>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= Projects Section ================= */}
-      <section className="py-16 px-6 bg-gray-50 rounded-xl shadow-lg border">
-        <h2 className="text-3xl font-bold text-blue-600 mb-8 text-center">
-          Projects
-        </h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <div className="bg-white p-6 rounded shadow-lg border text-center">
-            <h3 className="font-bold mb-2 text-gray-900">Portfolio Website</h3>
-            <p className="text-gray-600">My personal portfolio built with Next.js & TailwindCSS.</p>
-          </div>
-          <div className="bg-white p-6 rounded shadow-lg border text-center">
-            <h3 className="font-bold mb-2 text-gray-900">Bank Loan App</h3>
-            <p className="text-gray-600">A web app project for managing loan requests.</p>
-          </div>
-          <div className="bg-white p-6 rounded shadow-lg border text-center">
-            <h3 className="font-bold mb-2 text-gray-900">Other Project</h3>
-            <p className="text-gray-600">Another project showcasing skills and UI design.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= Contact Section ================= */}
-      <section className="py-16 px-6">
-        <h2 className="text-3xl font-bold text-blue-600 mb-8 text-center">
-          Contact Me
-        </h2>
-
-        <form className="max-w-2xl mx-auto space-y-4">
-          <input
-            type="text"
-            placeholder="Your Name"
-            className="w-full p-3 border rounded shadow-sm bg-white"
-          />
-          <input
-            type="email"
-            placeholder="Your Email"
-            className="w-full p-3 border rounded shadow-sm bg-white"
-          />
-          <textarea
-            placeholder="Your Message"
-            className="w-full p-3 border rounded shadow-sm bg-white"
-            rows={5}
-          />
-          <button
-            type="submit"
-            className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition"
+        <div className="mt-10 flex justify-center gap-6">
+          <a
+            href="/about"
+            className="px-8 py-3 bg-blue-600 text-white rounded-xl shadow-lg hover:bg-blue-700 transition"
           >
-            Send Message
-          </button>
-        </form>
+            About Me
+          </a>
+          <a
+            href="/projects"
+            className="px-8 py-3 bg-gray-900 text-white rounded-xl shadow-lg hover:bg-gray-800 transition"
+          >
+            My Projects
+          </a>
+        </div>
       </section>
 
+      {/* ================= Core Fields ================= */}
+      <section className="py-16">
+        <h2 className="text-4xl font-bold text-center mb-12 text-gray-900">
+          My Core Fields
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {/* Card */}
+          <div className="glass-card hover:scale-105 transition transform p-8 rounded-2xl shadow-xl text-center">
+            <h3 className="text-xl font-bold text-gray-900 mb-2">
+              Artificial Intelligence
+            </h3>
+            <p className="text-gray-700">
+              Studying intelligent systems, ML basics, and building AI-based
+              academic projects.
+            </p>
+          </div>
+
+          <div className="glass-card hover:scale-105 transition transform p-8 rounded-2xl shadow-xl text-center">
+            <h3 className="text-xl font-bold text-gray-900 mb-2">DSA in C++</h3>
+            <p className="text-gray-700">
+              Implementing Linked Lists, Trees, Graphs, Sorting, Searching, and
+              advanced algorithms.
+            </p>
+          </div>
+
+          <div className="glass-card hover:scale-105 transition transform p-8 rounded-2xl shadow-xl text-center">
+            <h3 className="text-xl font-bold text-gray-900 mb-2">
+              Python & Data Science
+            </h3>
+            <p className="text-gray-700">
+              Using NumPy, Pandas, and Kaggle datasets for analysis & ML
+              practice.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= Web Development ================= */}
+      <section className="py-20 bg-white/40 backdrop-blur-xl rounded-3xl shadow-xl border mx-auto max-w-6xl p-10">
+        <h2 className="text-4xl font-bold text-center mb-6 text-gray-900">
+          Web Development
+        </h2>
+
+        <p className="text-gray-700 text-lg max-w-3xl mx-auto text-center leading-relaxed">
+          I build modern, responsive UIs using <strong>Next.js</strong>,{" "}
+          <strong>React</strong>,<strong> TailwindCSS</strong> and clean design
+          principles. My focus is minimalism, clarity, and performance.
+        </p>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 mt-10">
+          <div className="premium-skill">Next.js</div>
+          <div className="premium-skill">React</div>
+          <div className="premium-skill">TailwindCSS</div>
+          <div className="premium-skill">JavaScript</div>
+          <div className="premium-skill">Git & GitHub</div>
+        </div>
+      </section>
     </main>
   );
 }
